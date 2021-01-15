@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Корень из чила</title>
+	<style type="text/css">
+		body {
+			background-color: #D3D3D3;
+		}
+		.main {
+			background-color: #A9A9A9;
+			border: solid;
+			border-color: #C0C0C0;
+			margin-left: 25%;
+			margin-right: 25%;
+			margin-top: 3.7%;
+			width: 50%;
+			height: 500px;
+		}
+		.block1 {
+			margin-top: 15px;
+			margin-left: 30px;
+		}
+
+	</style>
+</head>
+<body>
+	<div class="main">
+		<div class="block1">
+			<input type="text" id="enter" value="25" size="5" maxlength="10">
+			<input type="button" id="btn" value="√" onclick="show_K()">
+			<h3 id="exit" style="color: #000">Корень из 25: 5</h3><br>
+
+			<input type="button" id="table" value="Таблица корней" onclick="show_table()"><br id="table_after">
+		</div>
+	</div>
+	<script type="text/javascript">
+		function K(num) {
+			for(i=0; i<num; i++){
+				if (i * i == num){
+					return i
+				}
+            }
+        }
+		
+		function show_K(){
+			enter = document.getElementById('enter');
+	        btn = document.getElementById('btn');
+	        exit = document.getElementById('exit');
+
+        	exit.innerText = `Корень из ${enter.value}: ${K(enter.value)}`
+        	console.log(`Корень из ${enter.value}: ${K(enter.value)}`)
+        }
+
+    	_do = false
+        function show_table(){
+			if (_do == true){
+				for(i=0; i<=7; i++){
+					document.getElementById('table_element'+i).remove()
+				}
+				_do = false
+			}
+        	if (_do == false){
+	        	list = [] 
+	  			y = 0
+	        	for(i=K(enter.value); i<=100; i++){
+					list[y] = `${i} : ${i*i}`
+					y++
+				}
+				space = "\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0"
+				console.log(list)
+				for(i=0; i<=7; i++){
+					text = document.createElement("h3")
+					text.id = "table_element"+i
+					text.className = "table_elements"
+					text.innerText = list[i] + space + list[i + 7] + space + list[i + 14]
+					table_after.before(text)
+				}
+				_do = true
+			}
+		}
+	</script>
+</body>
+</html>
